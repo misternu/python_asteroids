@@ -24,11 +24,19 @@ def main():
             if event.type == pygame.QUIT:
                 return
 
-        screen.fill("black")
         for obj in updatable:
             obj.update(dt)
+
+        for asteroid in asteroids:
+            if asteroid.collides_with(player):
+                print("Game over!")
+                return
+
+        screen.fill("black")
+
         for obj in drawable:
             obj.draw(screen)
+
         pygame.display.flip()
 
         dt = clock.tick(60) / 1000
